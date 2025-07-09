@@ -1,4 +1,4 @@
-/* Reset and base */
+/* Reset & Base */
 * {
   margin: 0;
   padding: 0;
@@ -13,7 +13,7 @@ html, body {
   overflow: hidden;
 }
 
-/* Background animation */
+/* Background Animation */
 #bg {
   position: fixed;
   width: 200%;
@@ -30,7 +30,7 @@ html, body {
   100% { transform: translate(0, 0); }
 }
 
-/* Centered content */
+/* Centered Content */
 .content {
   height: 100%;
   display: flex;
