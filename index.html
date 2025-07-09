@@ -1,16 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Just Breathe</title>
-  <link rel="stylesheet" href="style.css?v=1.0.0" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Just Breathe</title>
+<style>
+  /* Base reset and styles */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  html, body {
+    height: 100%;
+    background-color: #0d0d0d;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    color: #fff;
+    overflow: hidden;
+  }
+  /* Background */
+  #bg {
+    position: fixed;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 30%, #222222, #0d0d0d 70%);
+    animation: moveBG 30s linear infinite;
+    z-index: -1;
+    filter: blur(40px);
+  }
+  @keyframes moveBG {
+    0% { transform: translate(0, 0); }
+    50% { transform: translate(-10%, -10%); }
+    100% { transform: translate(0, 0); }
+  }
+  /* Content */
+  .content {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+    flex-direction: column;
+  }
+  #affirmation {
+    font-size: 1.8rem;
+    line-height: 1.4;
+    max-width: 600px;
+    opacity: 1;
+    transition: opacity 1.5s ease;
+  }
+  #prompt-container {
+    margin-top: 2rem;
+    opacity: 0;
+    max-width: 600px;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #ccc;
+    font-style: italic;
+    transition: opacity 1.5s ease;
+  }
+  #user-affirmation {
+    margin-top: 1rem;
+    opacity: 0;
+    width: 80%;
+    max-width: 400px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    transition: opacity 1.5s ease;
+  }
+  #user-affirmation::placeholder {
+    color: #666;
+  }
+</style>
 </head>
 <body>
   <div id="bg"></div>
   <div class="content">
     <div id="affirmation">Loading...</div>
+    <div id="prompt-container">
+      Want to lift someone’s spirits? Share your own affirmation below.
+    </div>
+    <input
+      type="text"
+      id="user-affirmation"
+      placeholder="Type your affirmation here..."
+      autocomplete="off"
+    />
   </div>
-  <script src="script.js?v=1.0.0"></script>
+
+  <script>
+    const localAffirmations = [
+      "You are enough just as you are.",
+      "Every breath is a fresh start.",
+      "You are capable of amazing things.",
+      "You deserve peace.",
+      "Your energy is magnetic and healing.",
+      "Let go of what you can’t control.",
+      "You bring value to this world.",
+      "Even small steps move you forward.",
+      "You are resilient, not broken.",
+      "You have everything you need inside you.",
+      "You’re doing better than you think.",
+      "It’s okay to rest.",
+      "Progress is progress, even if small.",
+      "You’re not alone in this.",
+      "You bring light to someone’s day.",
+      "Peace begins with a breath.",
+      "You’ve survived 100% of your worst days.",
+      "This moment is yours to own.",
+      "You are allowed to feel joy today.",
+      "There is strength in your softness."
+    ];
+
+    function showRandomAffirmation() {
+      const i = Math.floor(Math.random() * localAffirmations.length);
+      const affEl = document.getElementById('affirmation');
+      const promptEl = document.getElementById('prompt-container');
+      const inputEl = document.getElementById('user-affirmation');
+
+      affEl.textContent = localAffirmations[i];
+      affEl.style.opacity = 1;
+      promptEl.style.opacity = 0;
+      inputEl.style.opacity = 0;
+
+      setTimeout(() => {
+        affEl.style.opacity = 0;
+        setTimeout(() => {
+          promptEl.style.opacity = 1;
+          inputEl.style.opacity = 1;
+          inputEl.focus();
+        }, 1600);
+      }, 5000);
+    }
+
+    showRandomAffirmation();
+  </script>
 </body>
 </html>
