@@ -5,11 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Just Breathe</title>
 <style>
-  /* Base reset and styles */
   * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    margin: 0; padding: 0; box-sizing: border-box;
   }
   html, body {
     height: 100%;
@@ -18,7 +15,6 @@
     color: #fff;
     overflow: hidden;
   }
-  /* Background */
   #bg {
     position: fixed;
     width: 200%;
@@ -29,11 +25,10 @@
     filter: blur(40px);
   }
   @keyframes moveBG {
-    0% { transform: translate(0, 0); }
+    0% { transform: translate(0,0); }
     50% { transform: translate(-10%, -10%); }
-    100% { transform: translate(0, 0); }
+    100% { transform: translate(0,0); }
   }
-  /* Content */
   .content {
     height: 100%;
     display: flex;
@@ -41,39 +36,13 @@
     justify-content: center;
     padding: 2rem;
     text-align: center;
-    flex-direction: column;
   }
   #affirmation {
     font-size: 1.8rem;
-    line-height: 1.4;
     max-width: 600px;
     opacity: 1;
     transition: opacity 1.5s ease;
-  }
-  #prompt-container {
-    margin-top: 2rem;
-    opacity: 0;
-    max-width: 600px;
-    text-align: center;
-    font-size: 1.2rem;
-    color: #ccc;
-    font-style: italic;
-    transition: opacity 1.5s ease;
-  }
-  #user-affirmation {
-    margin-top: 1rem;
-    opacity: 0;
-    width: 80%;
-    max-width: 400px;
-    padding: 0.5rem;
-    font-size: 1rem;
-    border-radius: 8px;
-    border: none;
-    outline: none;
-    transition: opacity 1.5s ease;
-  }
-  #user-affirmation::placeholder {
-    color: #666;
+    line-height: 1.4;
   }
 </style>
 </head>
@@ -81,63 +50,125 @@
   <div id="bg"></div>
   <div class="content">
     <div id="affirmation">Loading...</div>
-    <div id="prompt-container">
-      Want to lift someone’s spirits? Share your own affirmation below.
-    </div>
-    <input
-      type="text"
-      id="user-affirmation"
-      placeholder="Type your affirmation here..."
-      autocomplete="off"
-    />
   </div>
 
-  <script>
-    const localAffirmations = [
-      "You are enough just as you are.",
-      "Every breath is a fresh start.",
-      "You are capable of amazing things.",
-      "You deserve peace.",
-      "Your energy is magnetic and healing.",
-      "Let go of what you can’t control.",
-      "You bring value to this world.",
-      "Even small steps move you forward.",
-      "You are resilient, not broken.",
-      "You have everything you need inside you.",
-      "You’re doing better than you think.",
-      "It’s okay to rest.",
-      "Progress is progress, even if small.",
-      "You’re not alone in this.",
-      "You bring light to someone’s day.",
-      "Peace begins with a breath.",
-      "You’ve survived 100% of your worst days.",
-      "This moment is yours to own.",
-      "You are allowed to feel joy today.",
-      "There is strength in your softness."
-    ];
+<script>
+  const affirmations = [
+    "You are enough just as you are.",
+    "Every day is a new beginning.",
+    "I am worthy of love and happiness.",
+    "I choose to see the beauty in every moment.",
+    "I am strong, capable, and resilient.",
+    "I believe in my abilities and trust my intuition.",
+    "I am deserving of success and abundance.",
+    "I radiate positivity and attract positive experiences.",
+    "I am grateful for all the blessings in my life.",
+    "I embrace change and welcome growth.",
+    "I release all negativity and embrace inner peace.",
+    "I am enough, just as I am.",
+    "I am in control of my thoughts and emotions.",
+    "I am open to receiving love and support from others.",
+    "I am a magnet for happiness and joy.",
+    "I trust the journey and have faith in the process.",
+    "I am worthy of all the good that comes my way.",
+    "I am deserving of self-care and prioritize my well-being.",
+    "I embrace challenges as opportunities for growth.",
+    "I am confident in my abilities to overcome obstacles.",
+    "I choose to focus on the present moment and let go of the past.",
+    "I attract positive and uplifting people into my life.",
+    "I am surrounded by abundance and opportunities.",
+    "I am worthy of success and achievement in all areas of my life.",
+    "I am grateful for my body and treat it with love and respect.",
+    "I am at peace with myself and the world around me.",
+    "I am the architect of my own happiness and create a life I love.",
+    "I am capable of achieving greatness in all areas of my life.",
+    "Every day is a new opportunity for me to create a positive change.",
+    "I am grateful for all the abundance and love that surrounds me.",
+    "I have the power to overcome any challenges that come my way.",
+    "I am worthy of love, success, and happiness.",
+    "I choose to focus on the good and let go of negativity.",
+    "I trust in my abilities to manifest my dreams and goals.",
+    "I am filled with confidence, strength, and resilience.",
+    "I deserve all the wonderful things that life has to offer.",
+    "I am constantly evolving and becoming the best version of myself.",
+    "I am a unique and valuable person, and my contribution is valuable.",
+    "I am not my failures; I learn from them and grow.",
+    "I am deserving of all the compliments I receive.",
+    "I am proud of all I have accomplished.",
+    "I am grateful for the people in my life.",
+    "I am open to new experiences and opportunities.",
+    "I am capable of achieving my goals.",
+    "I am worthy of all the success and love life has to offer.",
+    "I am in charge of how I feel, and today I choose happiness.",
+    "I am deserving of kindness and compassion.",
+    "I embrace my uniqueness and celebrate my individuality.",
+    "I am patient with myself and others.",
+    "I am courageous and willing to take risks.",
+    "I forgive myself and release the past.",
+    "I am calm and centered in all situations.",
+    "I am creative and open to inspiration.",
+    "I am surrounded by love and support.",
+    "I nurture my mind, body, and spirit.",
+    "I am worthy of respect and acceptance.",
+    "I attract abundance in all forms.",
+    "I listen to my inner wisdom and trust it.",
+    "I am open to receiving guidance and clarity.",
+    "I am balanced and grounded.",
+    "I express gratitude daily.",
+    "I am aligned with my highest purpose.",
+    "I honor my feelings and allow them to flow.",
+    "I am compassionate to myself and others.",
+    "I am filled with energy and vitality.",
+    "I am peaceful and content.",
+    "I radiate love and kindness.",
+    "I am deserving of all my dreams coming true.",
+    "I welcome joy and happiness into my life.",
+    "I am resilient in the face of challenges.",
+    "I am open-minded and curious.",
+    "I release fear and embrace love.",
+    "I am worthy of forgiveness and healing.",
+    "I am confident in my decisions.",
+    "I embrace abundance and prosperity.",
+    "I am present in the moment.",
+    "I nurture positive relationships.",
+    "I am free from worry and stress.",
+    "I am proud of who I am becoming.",
+    "I am mindful and focused.",
+    "I honor my needs and communicate them clearly.",
+    "I am surrounded by opportunities to grow.",
+    "I am grateful for my journey.",
+    "I choose happiness and peace every day.",
+    "I am strong in mind, body, and spirit.",
+    "I am worthy of love and belonging.",
+    "I am open to new possibilities.",
+    "I am kind to myself and others.",
+    "I attract positivity and good energy.",
+    "I am authentic and true to myself.",
+    "I am deserving of rest and relaxation.",
+    "I am growing and learning every day.",
+    "I am full of hope and optimism.",
+    "I am empowered to create change.",
+    "I am calm, patient, and in control.",
+    "I trust that everything is working out for my highest good."
+  ];
 
-    function showRandomAffirmation() {
-      const i = Math.floor(Math.random() * localAffirmations.length);
-      const affEl = document.getElementById('affirmation');
-      const promptEl = document.getElementById('prompt-container');
-      const inputEl = document.getElementById('user-affirmation');
+  const affEl = document.getElementById('affirmation');
 
-      affEl.textContent = localAffirmations[i];
+  function showRandomAffirmation() {
+    const i = Math.floor(Math.random() * affirmations.length);
+    affEl.style.opacity = 0;
+    setTimeout(() => {
+      affEl.textContent = affirmations[i];
       affEl.style.opacity = 1;
-      promptEl.style.opacity = 0;
-      inputEl.style.opacity = 0;
+    }, 1500);
+  }
 
-      setTimeout(() => {
-        affEl.style.opacity = 0;
-        setTimeout(() => {
-          promptEl.style.opacity = 1;
-          inputEl.style.opacity = 1;
-          inputEl.focus();
-        }, 1600);
-      }, 5000);
-    }
-
+  function cycleAffirmations() {
     showRandomAffirmation();
-  </script>
+    setInterval(showRandomAffirmation, 7000);
+  }
+
+  cycleAffirmations();
+</script>
 </body>
 </html>
